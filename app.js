@@ -29,8 +29,21 @@ const tourSchema = mongoose.Schema({
   price: {
     type: Number,
     required:[true, 'add price'],
-    min:[0, "price can't negative"]
+    min:[0, "price can't negative"],
+    validate: {
+      validator:(value) =>{
+        const isInteger = Number.isInteger(value);
+        if(isInteger){
+          return true
+        }else{
+          return false
+        }
+      },
+      message: "quantity must be an integer"
+    },
+    
   }
+
 })
 
 
