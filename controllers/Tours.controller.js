@@ -1,11 +1,11 @@
-const Tours = require("../models/Tours");
+const { getTourService, createTourService } = require("../services/Tour.services")
 
 
 
 //get all tours
 exports.getTours = async(req, res, next)=>{
     try {
-      const result = await Tours.find().select('name price');
+      const result = await getTourService();
     
       res.status(200).json({
         status:'success',
@@ -28,8 +28,7 @@ exports.getTours = async(req, res, next)=>{
     exports.createTours = async (req, res, next) =>{
 
         try {
-         const tours = new Tours(req.body);
-         const result = await tours.save();
+         const result = await createTourService(req.body);
           
           res.status(200).json({
             status:"success",
