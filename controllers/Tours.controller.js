@@ -1,9 +1,10 @@
 const { getToursService,
     createTourService,
-    getTourService
+    getTourService,
+    updateTourService
 } = require("../services/Tour.services")
 
-
+const Tours = require("../models/Tours");
 
 //get all tours
 exports.getTours = async (req, res, next) => {
@@ -69,5 +70,25 @@ exports.getTour = async (req, res, next) => {
             message: 'tour found not done',
             error: error.message
         })
+    }
+}
+
+exports.updateTour = async(req, res, next)=>{
+    try {
+        const {id} = req.params;
+        const result = await updateTourService(id, req.body);
+
+        res.status(200).json({
+            status:'success',
+            message: 'tour update successful',
+            data: result 
+        })
+    } catch (error) {
+        res.status(400).json({
+            status:'fail',
+            message:'tour update failed',
+            error: error.message
+        })
+        
     }
 }

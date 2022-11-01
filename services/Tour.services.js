@@ -19,3 +19,9 @@ exports.getTourService = async(id)=>{
 
     return tour;
 }
+
+exports.updateTourService = async(id, data)=>{
+    const result = await Tours.updateOne({_id: id}, {$set: data});
+
+    return result;
+}
