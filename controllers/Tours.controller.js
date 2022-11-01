@@ -53,7 +53,8 @@ exports.createTours = async (req, res, next) => {
 exports.getTour = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const result = getTourService(id);
+        const result = await getTourService(id);
+        
 
         res.status(200).json({
             status: 'success',
