@@ -23,6 +23,7 @@ const tourSchema = mongoose.Schema({
 
   price: {
     type: Number,
+    trim:true,
     required:[true, 'add price'],
     min:[0, "price can't negative"],
     validate: {
@@ -40,6 +41,7 @@ const tourSchema = mongoose.Schema({
   },
   currency:{
     type: String,
+    required: true,
     enum: {
       values:['UDS', 'BDT', 'RUPEE']
     },

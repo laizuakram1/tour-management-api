@@ -2,7 +2,8 @@ const { getToursService,
     createTourService,
     getTourService,
     updateTourService,
-    getCheapestTourService
+    getCheapestTourService,
+    getTrendingTourService
 } = require("../services/Tour.services")
 
 const Tours = require("../models/Tours");
@@ -30,11 +31,11 @@ exports.getTours = async (req, res, next) => {
 }
 
 
-//post tours
+//post single tour
 exports.createTours = async (req, res, next) => {
 
     try {
-        const result = await createTourService(req.body);
+        const result = await createTourService(req.body, {runValidators: true});
 
         res.status(200).json({
             status: "success",
@@ -76,11 +77,12 @@ exports.getTour = async (req, res, next) => {
 }
 
 
-
+//update single tour by id
 exports.updateTour = async(req, res, next)=>{
     try {
         const {id} = req.params;
-        const result = await updateTourService(id, req.body);
+        const result = await updateTourService(id, req.body, {
+            runValidators: true});
 
         res.status(200).json({
             status:'success',
@@ -96,7 +98,7 @@ exports.updateTour = async(req, res, next)=>{
         
     }
 }
-
+// get cheapest tour
 exports.getCheapestTour = async(req, res, next)=>{
     try {
        const result =  await getCheapestTourService();
@@ -112,6 +114,25 @@ exports.getCheapestTour = async(req, res, next)=>{
             status: 'fail', 
             message:'cheapest tour not get'
         })
+    }
+}
+
+//get most trending tour
+exports.getTrendingTour = async(req, res, next)=>{
+    try {
+        const trending = await getTrendingTourService()
+        res.status(200).json({
+            status:'success',
+            message:'trending tour success', 
+            data: trending
+        })
+        
+    } catch (error) {
+        res.status(400).json({
+            status:'fail',
+            message:'trending tour failed',
+        })
+        
     }
 }
 
