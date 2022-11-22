@@ -2,7 +2,7 @@ const Tours = require("../models/Tours");
 
 
 exports.getToursService = async(query) =>{
-        const tourCollectin = await Tours.find({}).sort(query).limit(query.limit);
+        const tourCollectin = await Tours.find({}).sort(query.sort).limit(query.limit);
     
     return tourCollectin;
 }
