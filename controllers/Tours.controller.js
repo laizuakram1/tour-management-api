@@ -8,6 +8,8 @@ const { getToursService,
 
 const Tours = require("../models/Tours");
 
+
+
 //get all tours
 exports.getTours = async (req, res, next) => {
     try {
