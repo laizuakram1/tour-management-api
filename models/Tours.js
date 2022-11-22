@@ -42,15 +42,27 @@ const tourSchema = mongoose.Schema({
     type: String,
     enum: {
       values:['UDS', 'BDT', 'RUPEE']
-    }
-  }
+    },
+    
+  },
+  views:{
+    type: Number,
+    required: true
+  },
+  
+
+
+
 
 },{
   // mongoose optional validation type here
 
   timestamps:true,
+  
+  
 })
 
 const Tours = mongoose.model('Tours', tourSchema );
+
 
 module.exports= Tours;

@@ -1,9 +1,9 @@
 const Tours = require("../models/Tours");
 
 
-exports.getToursService = async() =>{
-    const tourCollectin = await Tours.find({});
-
+exports.getToursService = async(query) =>{
+        const tourCollectin = await Tours.find({}).sort(query).limit(query.limit);
+    
     return tourCollectin;
 }
 
@@ -14,14 +14,21 @@ exports.createTourService = async(data) =>{
 }
 
 exports.getTourService = async(id)=>{
-    const tour = await Tours.findById({_id: id});
-    
+    const tour = await Tours.findById({_id: id})
 
     return tour;
 }
 
 exports.updateTourService = async(id, data)=>{
-    const result = await Tours.updateOne({_id: id}, {$set: data});
+    const result = await Tours.updateOne({_id: id}, {$set: data}, {runValidators: true});
 
     return result;
 }
+
+exports.getCheapestTourService = async ()=>{
+    const cheapestTour = await Tours.find({}).sort({price: 1}).limit(3)
+
+    return cheapestTour;
+}
+
+

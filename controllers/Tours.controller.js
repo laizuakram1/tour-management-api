@@ -1,7 +1,8 @@
 const { getToursService,
     createTourService,
     getTourService,
-    updateTourService
+    updateTourService,
+    getCheapestTourService
 } = require("../services/Tour.services")
 
 const Tours = require("../models/Tours");
@@ -9,7 +10,8 @@ const Tours = require("../models/Tours");
 //get all tours
 exports.getTours = async (req, res, next) => {
     try {
-        const result = await getToursService();
+        // console.log(req.query.limit);
+        const result = await getToursService(req.query);
 
         res.status(200).json({
             status: 'success',
@@ -54,13 +56,13 @@ exports.createTours = async (req, res, next) => {
 exports.getTour = async (req, res, next) => {
     try {
         const {id} = req.params;
-        const result = await getTourService(id);
-        
+        const tourById = await getTourService(id);
+       
 
         res.status(200).json({
             status: 'success',
             message: 'tour get successful',
-            data: result
+            data: tourById
         })
 
 
@@ -72,6 +74,8 @@ exports.getTour = async (req, res, next) => {
         })
     }
 }
+
+
 
 exports.updateTour = async(req, res, next)=>{
     try {
@@ -92,3 +96,22 @@ exports.updateTour = async(req, res, next)=>{
         
     }
 }
+
+exports.getCheapestTour = async(req, res, next)=>{
+    try {
+       const result =  await getCheapestTourService();
+
+       res.status(200).json({
+        status: 'success',
+        message: 'cheapest tour found',
+        data: result
+       })
+        
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail', 
+            message:'cheapest tour not get'
+        })
+    }
+}
+
