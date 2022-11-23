@@ -1,7 +1,7 @@
 # tour-management-api
 > This is Tour management API project. The project have schema and follow MVC pattern for this project. In this project, you have to provide several endpoint in client side. The endpoint are:-
 
-#### Get all tours api[http://localhost:5000/api/v1/tours]
+#### Get all tours api <http://localhost:5000/api/v1/tours>
 #### Get tours api using Id[http://localhost:5000/api/v1/tours/:id].
 #### post tours api[http://localhost:5000/api/v1/tours].
 #### update single tours api using Id[http://localhost:5000/api/v1/tour/:id].
