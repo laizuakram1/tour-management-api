@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
-require('dotenv').config({path:'../.env'})
 
 
+
+require('dotenv').config();
 const app = require("./app");
-const port = 5000;
+const port = process.env.PORT || 8000;
 
 
 
 //database connection 
-mongoose.connect(`mongodb://localhost:27017/tour-management-api`).then(()=>{
+mongoose.connect(process.env.DATABASE_LOCAL)
+.then(()=>{
     console.log('database connect successfully');
 });
 
